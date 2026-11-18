@@ -17,7 +17,7 @@ from pipeline import DATABASE, ROOT, query
 OUT = ROOT / 'outputs'
 REPORT = ROOT / 'report'
 NAMES = ('overview', 'daily', 'daypart', 'airports', 'matched', 'focus')
-# US DOT February 2025 Air Travel Consumer Report, Table 7B (December total).
+# US DOT February 2025 Air Travel Consumer Report, Table 7A (December total).
 BENCHMARK = dict(scheduled=590581, on_time=461111, cancelled=4151, diverted=1598)
 NAVY, MUTED, TEAL, ORANGE, PALE = '#102a43', '#486581', '#087e83', '#a64215', '#e9f2f6'
 plt.rcParams.update({'font.family': 'DejaVu Sans', 'text.color': NAVY,
@@ -46,7 +46,7 @@ def validate(tables, audit):
             if sum(r[measure] for r in subset) != airport[measure]:
                 raise ValueError(f'{origin} drill-down does not reconcile')
     if any(a[k] != n for k, n in BENCHMARK.items()):
-        raise ValueError('Aggregate counts do not match DOT Table 7B')
+        raise ValueError('Aggregate counts do not match DOT Table 7A')
 
 
 def page(n, section, title, subtitle):
@@ -201,7 +201,7 @@ def make_report(tables, audit):
               f"Keep cancelled/diverted flights but leave ordinary arrival delay blank.")
         block(fig, .657, '2. Cross-check the counts against the DOT report [2]',
               f"Disrupted means arriving 15+ minutes late, being cancelled or being diverted. The denominator is known outcomes "
-              f"({a['unknown']:,} unknown here). DOT Table 7B matches scheduled, on-time, cancelled and diverted counts exactly. "
+              f"({a['unknown']:,} unknown here). DOT Table 7A matches scheduled, on-time, cancelled and diverted counts exactly. "
               f"Among completed non-diverted flights only, {a['completed_late_pct']:.2f}% arrived 15+ minutes late.")
         block(fig, .511, '3. Diagnose before changing the schedule',
               f"At {v['origin']}, split evening records by date, carrier and directional route; then review weather, aircraft rotations "
@@ -212,7 +212,7 @@ def make_report(tables, audit):
               'Read sql/overview.sql first, then sql/daypart.sql and sql/matched.sql. No database server is needed.')
         fig.text(.09, .195, 'Sources (click to open)', weight='bold', fontsize=11)
         refs = [('[1] BTS TranStats reporting carrier data dictionary', 'https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FGJ'),
-                ('[2] U.S. DOT February 2025 Air Travel Consumer Report, Table 7B', 'https://www.transportation.gov/sites/dot.gov/files/2025-03/February%202025%20ATCR.pdf'),
+                ('[2] U.S. DOT February 2025 Air Travel Consumer Report, Table 7A', 'https://www.transportation.gov/sites/dot.gov/files/2025-03/February%202025%20ATCR.pdf'),
                 ('[3] BTS December 2024 source archive', audit['source_url'])]
         for i, (text, url) in enumerate(refs):
             fig.text(.09, .17 - .024 * i, text, fontsize=9, color=TEAL, url=url)

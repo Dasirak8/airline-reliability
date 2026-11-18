@@ -48,7 +48,7 @@ python analyze.py
 | `analyze.py` | Runs read-only SQL, checks reconciliation, exports six tables, and draws three charts plus the PDF. |
 | `outputs/audit.json` | Records the source checksum, 0 exact duplicates, 0 extra rows on the candidate key, and 590,581 retained rows. |
 
-**Validation:** Daily and departure-window counts sum to the overall counts. The two airport drill-downs sum to their airport totals. The run also matches DOT Table 7B for 590,581 scheduled, 461,111 on-time, 4,151 cancelled and 1,598 diverted flights.[2] That is an external cross-check against published aggregates from the same reporting system, not a second independent dataset.
+**Validation:** Daily and departure-window counts sum to the overall counts. The two airport drill-downs sum to their airport totals. The run also matches DOT Table 7A for 590,581 scheduled, 461,111 on-time, 4,151 cancelled and 1,598 diverted flights.[2] That is an external cross-check against published aggregates from the same reporting system, not a second independent dataset.
 
 **Next decision:** Break down DFW evening by date, carrier, and directional route. Check whether the same segments recur in other months, then compare weather and inbound aircraft rotations before testing a schedule or staffing change. The observed rates cannot establish cause, avoidable flights or expected savings.
 
@@ -58,6 +58,6 @@ Personal portfolio case study. Initial implementation and report were AI-assiste
 
 [1] https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FGJ — BTS TranStats reporting carrier data dictionary
 
-[2] https://www.transportation.gov/sites/dot.gov/files/2025-03/February%202025%20ATCR.pdf — DOT February 2025 Air Travel Consumer Report, Table 7B
+[2] https://www.transportation.gov/sites/dot.gov/files/2025-03/February%202025%20ATCR.pdf — DOT February 2025 Air Travel Consumer Report, Table 7A
 
 [3] https://www.transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2024_12.zip — BTS December 2024 source archive
